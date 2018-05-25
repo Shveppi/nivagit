@@ -85,8 +85,7 @@ class SlideController extends Controller
 
             $slide->save();
 
-			return redirect()
-						->back()
+			return redirect('/slide/list')
 						->with( 'message', 'Вы добавили слайдер, просто умничко!' );
 		} // else если прошла валидация
 
@@ -94,8 +93,9 @@ class SlideController extends Controller
 
 
     public function list() {
-        $slide = new Slide;
+        $slides = Slide::paginate(1);
 
+        return view('pages.slide-list', compact('slides'));
         
     }
 
