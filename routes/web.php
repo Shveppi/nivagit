@@ -17,5 +17,6 @@ Route::get('/', function () {
 
 
 Route::get('/slide/add', 'SlideController@showForm');
+Route::get('/slide/list', 'SlideController@list');
 
 Route::post('/slide/add', 'SlideController@create');

@@ -5,8 +5,6 @@
 @endsection
 
 
-
-
 @section('content')
 
 	@if(session()->has('message'))

@@ -28,9 +28,8 @@ class SlideController extends Controller
     				->back()
     				->withErrors('Дружище, без картинки слайдер не слайдер, добавь пожалуйста картинку в поле фото')
     				->withInput();
-    	}
-
-
+        }
+        
     	/*
     	 *
     	 * Logic
@@ -91,6 +90,13 @@ class SlideController extends Controller
 						->with( 'message', 'Вы добавили слайдер, просто умничко!' );
 		} // else если прошла валидация
 
+    }
+
+
+    public function list() {
+        $slide = new Slide;
+
+        
     }
 
 
