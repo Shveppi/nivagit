@@ -12,16 +12,36 @@ use Illuminate\Support\Facades\Hash;
 class SlideController extends Controller
 {
 
+    /*
 
+    Вывод всех слайдеров
 
-    public function showForm() {
-    	return view('pages.gallery-form');
+    */
+    public function index() {
+
+        $slides = Slide::paginate(20);
+
+        return view('pages.slide-list', compact('slides'));
+        
+    }
+
+    /*
+
+    Форма добавления слайда
+
+    */
+    public function create() {
+    	return view('pages.slide-form');
     }
 
 
 
+    /*
 
-    public function create(Request $request) {
+    Метод добавления слайда
+
+    */
+    public function store(Request $request) {
 
     	if(!$request->hasFile('pic')) {
     		return redirect()
@@ -50,7 +70,7 @@ class SlideController extends Controller
 		}
 
 		else {
-            $filepath = 'slide/'.rand(11111,99999) . '.jpg'; // простая переменная с путем к папке и рандомным наименованием картинки.
+            $filepath = 'sliders/'.rand(11111,99999) . '.jpg'; // простая переменная с путем к папке и рандомным наименованием картинки.
             $image = Image::make($request->file('pic'));
 
             if($image->resize(	null,
@@ -77,7 +97,6 @@ class SlideController extends Controller
             $slide->alttitle = Str::slug($request->title);
             $slide->description = $request->description;
             $slide->url = $request->url;
-            $slide->church = $request->church;
             $slide->user_id = 1;
             $slide->active = 1;
             $slide->published_at = \Carbon\Carbon::now();
@@ -85,19 +104,49 @@ class SlideController extends Controller
 
             $slide->save();
 
-			return redirect('/slide/list')
-						->with( 'message', 'Вы добавили слайдер, просто умничко!' );
-		} // else если прошла валидация
+            return redirect()
+                        ->action('SlideController@index')
+                        ->with( 'message', 'Вы добавили слайдер, просто умничко!' );
+        } // else если прошла валидация
 
     }
 
+    /*
 
-    public function list() {
-        $slides = Slide::paginate(1);
+    Вывод формы редактирования слайда
 
-        return view('pages.slide-list', compact('slides'));
-        
+    */
+    public function edit($slug) {
+
+        $slide = Slide::where('alttitle', '=', $slug)->firstOrFail();
+
+        return view('pages.slide-editform', compact('slide'));
+
     }
 
+    /*
+
+    Метод редактирования слайдера
+
+    */
+    public function update($slug, Request $request) {
+
+    }
+
+    /*
+
+    Метод детального просотра слайдера
+
+    */
+    public function show($slug) {
+        return 'Детальный просмотр слайда '.$slug;
+    }
+
+    public function destroy($slug) {
+
+        //$eee = echo'удаление слайда '. $slug
+
+        return 'удаление слайда '. $slug;
+    }
 
 }

@@ -7,16 +7,34 @@
 
 @section('content')
 
+	@if(session()->has('message'))
+	    <div class="alert alert-success">
+	        {{ session()->get('message') }}
+	    </div>
+	@endif
+
+
+	@if ($errors->any())
+		<div class="alert alert-danger">
+		    <ul>
+		        @foreach ($errors->all() as $error)
+		            <li>{{ $error }}</li>
+		        @endforeach
+		    </ul>
+			<p>Не переживай, мой друг! Ты всё сможешь!</p>
+		</div>
+	@endif
+
+
 	<div class="container">
 		<div class="row">
 			
-	{!!Form::open(['action' => 'SlideController@store', 'files' => 'true'])!!}
-
-
+	{!!Form::model($slide, ['method' => 'PATCH', 'action' => ['SlideController@update', $slide->alttitle], 'files' => 'true'])!!}
 			<div class="form-group">
+
+
 		{!!Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Заголовок'])!!}
 			</div>
-
 
 			<div class="form-group">
 		{!!Form::text('description', null, ['class' => 'form-control', 'placeholder' => 'Краткий текст'])!!}
@@ -27,7 +45,6 @@
 			</div>
 				
 			<div class="custom-file">
-
 
 		<div class="fileupload fileupload-new" data-provides="fileupload">
 			<span class="btn btn-primary btn-file"><span class="fileupload-new">
@@ -46,11 +63,8 @@
 
         <hr width="40%">
 
-    	{!!Form::submit('Готово', ['class' => 'btn btn-primary'])!!}
+    {!!Form::submit('Готово', ['class' => 'btn btn-primary'])!!}
 			
-
-
-
 	{!!Form::close()!!}
 
 		</div>

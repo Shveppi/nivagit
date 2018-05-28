@@ -13,11 +13,20 @@
         {{Html::script(asset('js/script.js'))}}
         {{--Html::style(asset('css/style.css'))--}}
         {{Html::style(asset('css/style_input.css'))}}
+        {{Html::style(asset('//use.fontawesome.com/releases/v5.0.13/css/all.css'))}}
 
     </head>
     <body>
+
+        @include('assets.menu')
+
         <div class="container">
+
             <h2>@yield('title', 'Главная')</h2>
+
+            <br />
+
+            @include('errors.list')
         
             @yield('content')
 

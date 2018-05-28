@@ -15,8 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+/*
 Route::get('/slide/add', 'SlideController@showForm');
 Route::get('/slide/list', 'SlideController@list');
 
 Route::post('/slide/add', 'SlideController@create');
+Route::get('/slide/{slug}', 'SlideController@editForm');
+*/
+
+Route::resource('slide', 'SlideController');

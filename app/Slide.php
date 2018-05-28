@@ -12,7 +12,6 @@ class Slide extends Model
     	'description',
     	'url',
     	'pic',
-    	'church',
     	'published_at'
     ];
 }
