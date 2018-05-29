@@ -1,3 +1,23 @@
 .custom-file-label::after {
 	content: "Жмякни";
 }
+
+body {
+	color: #73879C;
+}
+
+.btn.btn-gray {
+	background: #EDEDED;
+	border-radius: 50%;
+	transition: all 500ms;
+}
+
+.table tr:hover .br-blue {
+	background: #DFDBFC;
+	border: 1px solid #8B8BE7;
+}
+
+.table tr:hover .br-red {
+	background: #FCC0B9;
+	border: 1px solid #FC4631;
+}

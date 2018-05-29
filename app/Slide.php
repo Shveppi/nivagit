@@ -11,7 +11,6 @@ class Slide extends Model
     	'title',
     	'description',
     	'url',
-    	'pic',
     	'published_at'
     ];
 }
