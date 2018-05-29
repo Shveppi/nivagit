@@ -147,12 +147,9 @@ class SlideController extends Controller
 
         $slide = Slide::where('alttitle', '=', $slug)->firstOrFail();
 
-
+        $notPic = false; // Готовоим картинку
         if(!$request->hasFile('pic')) {
-            return redirect()
-                    ->back()
-                    ->withErrors('Дружище, без картинки слайдер не слайдер, добавь пожалуйста картинку в поле фото')
-                    ->withInput();
+            $notPic = true;
         }
         
         /*
@@ -161,10 +158,18 @@ class SlideController extends Controller
          *
          **/
 
-        $rules = array(
-            'pic' => 'image',
-            'title' => 'required|max:255',
-        );
+        if($request->title == $slide->title) {
+            $rules = array(
+                'pic' => 'image',
+                'title' => 'required|max:255',
+            );
+        } else {
+            $rules = array(
+                'pic' => 'image',
+                'title' => 'required|max:255|unique:slides',
+            );
+        }
+
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
@@ -179,44 +184,55 @@ class SlideController extends Controller
             
             /*
 
-            Готовим картинку
+            Готовим картинку, если ее обновляли
 
             */
-            $filepath = 'sliders/'.rand(11111,99999) . '.jpg'; //переменная с путем и именем картинки
 
-            $image = Image::make($request->file('pic'));
+            if($notPic === false) { // Если с формы приходит картинка
 
-            if( $image->resize(  null,
-                300,
-                function ($constraint) {
-                    $constraint->aspectRatio();
-                })->save( $filepath, 90 ) ) // Сохранение картинки размеры (ширина: авто, высота: 300)
+                $filepath = 'sliderow/' . rand(11111, 99999) . '.jpg'; //переменная с путем и именем картинки
 
-            {
+                $image = Image::make($request->file('pic'));
 
-                $savePath = $filepath; // Путь для новой картинки
-
-                // Удаляем старую картинку
-                $deletePic = $slide->pic;
-
-                Storage::delete($slide->pic);
+                $image->resize(null,
+                    300,
+                    function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
 
 
 
-            } else {
-                return redirect()
-                    ->back()
-                    ->withErrors('Дружище, не удалось сохранить картинку, попробуй еще раз')
-                    ->withInput();
+                if ( Storage::put('public/'.$filepath, (string) $image->encode()) )// ->save($filepath, 90)) // Сохранение картинки размеры (ширина: авто, высота: 300)
+
+                {
+
+                    $oldFile = 'public/'.$slide->pic;
+
+                    // Удаляем старую картинку
+                    if( Storage::disk('local')->exists($oldFile) ) {
+
+                        Storage::delete($oldFile);
+                        $slide->pic = $filepath;
+
+                    } else {
+                        return 'Все плохо';
+                    }
+
+
+                } else {
+                    return redirect()
+                        ->back()
+                        ->withErrors('Дружище, не удалось сохранить картинку, попробуй еще раз')
+                        ->withInput();
+                }
             }
-
 
             /*
 
             Сохраняем
 
             */
-            
+
             $slide->user_id = 1;
             $slide->title = $request->title;
             $slide->alttitle = Str::slug($request->title);
@@ -225,13 +241,16 @@ class SlideController extends Controller
             $slide->user_id = 1;
             $slide->active = 1;
             $slide->published_at = \Carbon\Carbon::now();
-            $slide->pic = $savePath;
 
             $slide->save();
 
             return redirect()
                         ->action('SlideController@index')
-                        ->with( 'message', 'Вы обновили слайдер, просто умничко!<br />Удалена картинка'. $deletePic );
+                        ->with( 'message', 'Вы обновили слайдер, просто умничко!' );
+
+
+
+
         } // else если прошла валидация
     }
 
@@ -243,7 +262,7 @@ class SlideController extends Controller
 
     /*
 
-    Метод детального просотра слайдера
+    Метод детального просмотра слайдера
 
     */
     public function show($slug) {
@@ -257,7 +276,7 @@ class SlideController extends Controller
         $slide = Slide::where('alttitle', '=', $slug)->firstOrFail();
 
 
-        return dd( Storage::get('sliders/35476.jpg') );
+        return var_dump(Storage::disk('local')->exists('public/sliderow/file.txt') );//->put('file.txt', 'Contents') );  //('sliders/25542.jpg') );
     }
 
 }

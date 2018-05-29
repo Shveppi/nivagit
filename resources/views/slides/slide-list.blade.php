@@ -24,7 +24,7 @@
 		@foreach($slides as $slide)
 		<tr>
 			<td>1</td>
-			<td class="text-center">{{Html::image($slide->pic, 'image', ['class' => 'img-fluid', 'style' => 'max-width: 70px;'])}}</td>
+			<td class="text-center">{{Html::image('storage/'.$slide->pic, 'image', ['class' => 'img-fluid', 'style' => 'max-width: 70px;'])}}</td>
 			<td>{{$slide->title}}<br />@isset($slide->description)<small class="text-muted">{{$slide->description}}</small>@endisset</td>
 			<td>sad</td>
 			<td>{{$slide->created_at}} <br /> {{$slide->published_at}}</td>
