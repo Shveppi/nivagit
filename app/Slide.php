@@ -10,7 +10,6 @@ class Slide extends Model
     protected $fillable = [
     	'title',
     	'description',
-    	'url',
-    	'published_at'
+    	'url'
     ];
 }

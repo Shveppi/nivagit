@@ -24,3 +24,5 @@ Route::get('/slide/{slug}', 'SlideController@editForm');
 */
 
 Route::resource('slide', 'SlideController');
+
+//Route::resource('test', 'TestController');

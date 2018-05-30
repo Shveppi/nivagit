@@ -50,17 +50,14 @@ class SlideController extends Controller
     				->withErrors('Дружище, без картинки слайдер не слайдер, добавь пожалуйста картинку в поле фото')
     				->withInput();
         }
-        
-    	/*
-    	 *
-    	 * Logic
-    	 *
-    	 **/
+
+
 
 		$rules = array(
 			'pic' => 'image',
 			'title' => 'required|max:255',
 		);
+
 		$validator = Validator::make($request->all(), $rules);
 
 		if ($validator->fails()) {
@@ -68,9 +65,7 @@ class SlideController extends Controller
 						->back()
                         ->withErrors($validator)
                         ->withInput();
-		}
-
-		else {
+		} else {
 
             
             /*
@@ -78,51 +73,46 @@ class SlideController extends Controller
             Готовим картинку
 
             */
-            $filepath = 'sliders/'.rand(11111,99999) . '.jpg'; // простая переменная с путем к папке и рандомным наименованием картинки.
+            $slide = new Slide();
+            $slide->fill($request->all());
+
+            $filepath = 'sliderow/'.rand(11111,99999) . '.jpg';// Картинка
+
             $image = Image::make($request->file('pic'));
 
-            if($image->resize(	null,
+            $image->resize(	null,
                 300,
                 function ($constraint) {
                     $constraint->aspectRatio();
-                })->save( $filepath, 90 )) // Сохранение картинки размеры (ширина: авто, высота: 300)
+                });
 
-            {
+            if( Storage::put( 'public/'. $filepath, (string)$image->encode() ) ) {
 
-                $savePath = $filepath;
+                $slide->user_id = 1;
+                $slide->alttitle = Str::slug($request->title);
+                $slide->user_id = 1;
+                $slide->active = 1;
+                $slide->published_at = \Carbon\Carbon::now();
+                $slide->pic = $filepath;
+
+                $slide->save();
+
+                return redirect()
+                            ->action('SlideController@index')
+                            ->with( 'message', 'Вы добавили слайдер, просто умничко!' );
 
             } else {
                 return redirect()
-                    ->back()
-                    ->withErrors('Дружище, не удалось сохранить картинку, попробуй еще раз')
-                    ->withInput();
+                            ->action('SlideController@index')
+                            ->withErrors( 'Что-то не так, слайдер не добавился' );
             }
 
-
-            /*
-
-            Сохраняем
-
-            */
-		    $slide = new Slide();
-            $slide->user_id = 1;
-            $slide->title = $request->title;
-            $slide->alttitle = Str::slug($request->title);
-            $slide->description = $request->description;
-            $slide->url = $request->url;
-            $slide->user_id = 1;
-            $slide->active = 1;
-            $slide->published_at = \Carbon\Carbon::now();
-            $slide->pic = $savePath;
-
-            $slide->save();
-
-            return redirect()
-                        ->action('SlideController@index')
-                        ->with( 'message', 'Вы добавили слайдер, просто умничко!' );
         } // else если прошла валидация
 
     }
+
+
+
 
     /*
 
@@ -137,6 +127,9 @@ class SlideController extends Controller
 
     }
 
+
+
+
     /*
 
     Метод редактирования слайдера
@@ -147,41 +140,39 @@ class SlideController extends Controller
 
         $slide = Slide::where('alttitle', '=', $slug)->firstOrFail();
 
-        $notPic = false; // Готовоим картинку
+        $notPic = false; // Если не прислали картинку
         if(!$request->hasFile('pic')) {
             $notPic = true;
         }
         
-        /*
-         *
-         * Logic
-         *
-         **/
-
-        if($request->title == $slide->title) {
+        // Правила валидации
+        if($request->title == $slide->title) { // Если заголовок не обновляли
             $rules = array(
                 'pic' => 'image',
                 'title' => 'required|max:255',
             );
-        } else {
+        } else { // Если обновили заголовок
             $rules = array(
                 'pic' => 'image',
                 'title' => 'required|max:255|unique:slides',
             );
         }
 
+
         $validator = Validator::make($request->all(), $rules);
 
-        if ($validator->fails()) {
+        if ($validator->fails()) { // Есл ошибка валидации
             return redirect()
                         ->back()
                         ->withErrors($validator)
                         ->withInput();
         }
 
-        else {
+        else { // Успешная валидация
 
             
+            $oldFilePic = 'public/'.$slide->pic;
+
             /*
 
             Готовим картинку, если ее обновляли
@@ -190,7 +181,7 @@ class SlideController extends Controller
 
             if($notPic === false) { // Если с формы приходит картинка
 
-                $filepath = 'sliderow/' . rand(11111, 99999) . '.jpg'; //переменная с путем и именем картинки
+                $newPic = 'sliderow/' . rand(11111, 99999) . '.jpg'; // новая картинка
 
                 $image = Image::make($request->file('pic'));
 
@@ -202,22 +193,15 @@ class SlideController extends Controller
 
 
 
-                if ( Storage::put('public/'.$filepath, (string) $image->encode()) )// ->save($filepath, 90)) // Сохранение картинки размеры (ширина: авто, высота: 300)
-
+                if ( Storage::put('public/'.$newPic, (string) $image->encode()) ) // Создаем картинку
                 {
 
-                    $oldFile = 'public/'.$slide->pic;
-
                     // Удаляем старую картинку
-                    if( Storage::disk('local')->exists($oldFile) ) {
-
-                        Storage::delete($oldFile);
-                        $slide->pic = $filepath;
-
-                    } else {
-                        return 'Все плохо';
+                    if( Storage::disk('local')->exists($oldFilePic) ) {
+                        Storage::delete($oldFilePic);
                     }
 
+                    $slide->pic = $newPic;
 
                 } else {
                     return redirect()
@@ -238,7 +222,6 @@ class SlideController extends Controller
             $slide->alttitle = Str::slug($request->title);
             $slide->description = $request->description;
             $slide->url = $request->url;
-            $slide->user_id = 1;
             $slide->active = 1;
             $slide->published_at = \Carbon\Carbon::now();
 
@@ -258,8 +241,6 @@ class SlideController extends Controller
 
 
 
-
-
     /*
 
     Метод детального просмотра слайдера
@@ -271,12 +252,34 @@ class SlideController extends Controller
 
 
 
+
+    /*
+
+    Метод удаления слайдера
+
+    */
     public function destroy($slug) {
 
         $slide = Slide::where('alttitle', '=', $slug)->firstOrFail();
 
 
-        return var_dump(Storage::disk('local')->exists('public/sliderow/file.txt') );//->put('file.txt', 'Contents') );  //('sliders/25542.jpg') );
+        if( Storage::disk('local')->exists('public/'.$slide->pic) ) {
+            if( Storage::delete('public/'.$slide->pic) )
+                $messageEr = 'Слайдер успешно удален, вместе с картинкой!';
+        }
+
+        if($slide->delete()) {
+            if(!isset($messageEr))
+                $messageEr = 'Слайдер успешно удален, без картинки!';
+
+            return redirect()
+                    ->back()
+                    ->with('message', $messageEr);
+        }
+
     }
+
+
+
 
 }
