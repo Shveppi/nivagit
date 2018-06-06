@@ -44,6 +44,10 @@ class SlideController extends Controller
     */
     public function store(Request $request) {
 
+            //$dates = \Carbon\Carbon::parse($request->published_at)->format('Y-m-d H:i:s');
+
+        //return $dates->format('Y');
+
     	if(!$request->hasFile('pic')) {
     		return redirect()
     				->back()
@@ -90,9 +94,11 @@ class SlideController extends Controller
 
                 $slide->user_id = 1;
                 $slide->alttitle = Str::slug($request->title);
-                $slide->user_id = 1;
+
+                $slide->published_at = $request->published_at;
+                //$slide->published_at = $request->published_at;
+                //\Carbon\Carbon::parse($request->published_at)->format('Y-m-d H:i:s');
                 $slide->active = 1;
-                $slide->published_at = \Carbon\Carbon::now();
                 $slide->pic = $filepath;
 
                 $slide->save();
@@ -223,7 +229,7 @@ class SlideController extends Controller
             $slide->description = $request->description;
             $slide->url = $request->url;
             $slide->active = 1;
-            $slide->published_at = \Carbon\Carbon::now();
+            $slide->published_at = $request->published_at;
 
             $slide->save();
 

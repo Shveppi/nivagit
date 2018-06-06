@@ -9,6 +9,10 @@
 	<div class="form-group">
 {!!Form::text('url', null, ['class' => 'form-control', 'placeholder' => 'Ссылка'])!!}
 	</div>
+
+	<div class="form-group">
+{!!Form::text('published_at', Carbon\Carbon::now()->format('Y-m-d H:i'), ['class' => 'form-control datepicker-here', 'placeholder' => 'Дата публикации', 'data-timepicker' => 'true', 'data-time-format' => 'hh:ii'])!!}
+	</div>
 			
 	<div class="custom-file">
 

@@ -26,3 +26,6 @@ Route::get('/slide/{slug}', 'SlideController@editForm');
 Route::resource('slide', 'SlideController');
 
 //Route::resource('test', 'TestController');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
