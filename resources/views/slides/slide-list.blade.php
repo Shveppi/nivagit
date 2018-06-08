@@ -14,6 +14,7 @@
 			<th scope="col">#</th>
 			<th scope="col">Картинка</th>
 			<th scope="col">Заголовок</th>
+			<th scope="col">Ссылка</th>
 			
 			<th scope="col">Дата создания / публикации</th>
 			<th scope="col">Управление</th>
@@ -25,8 +26,10 @@
 		<tr>
 			<td>1</td>
 			<td class="text-center">{{Html::image('storage/'.$slide->pic, 'image', ['class' => 'img-fluid', 'style' => 'max-width: 70px;'])}}</td>
-			<td>{{$slide->title}}<br />@isset($slide->description)<small class="text-muted">{{$slide->description}}</small>@endisset</td>
-			<td>{{$slide->created_at}} <br /> {{$slide->published_at}}</td>
+			<td>{{$slide->title}}<br />@isset($slide->description)<small class="text-muted">{{$slide->description}}</small>@endisset
+			</td>
+			<td>{{$slide->url}}</td>
+			<td>{{$slide->created_at}}<br />{{$slide->published_at}}</td>
 			<td>
 				{!!Form::open(['method' => 'DELETE', 'action' => ['SlideController@destroy', $slide->alttitle] ])!!}
 

@@ -6,9 +6,6 @@
 
 
 @section('content')
-
-	<div class="container">
-		<div class="row">
 			
 	{!!Form::open(['action' => 'SlideController@store', 'files' => 'true'])!!}
 
@@ -17,8 +14,5 @@
 
 
 	{!!Form::close()!!}
-
-		</div>
-	</div>
 
 @endsection

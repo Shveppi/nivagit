@@ -44,10 +44,6 @@ class SlideController extends Controller
     */
     public function store(Request $request) {
 
-            //$dates = \Carbon\Carbon::parse($request->published_at)->format('Y-m-d H:i:s');
-
-        //return $dates->format('Y');
-
     	if(!$request->hasFile('pic')) {
     		return redirect()
     				->back()
@@ -58,8 +54,9 @@ class SlideController extends Controller
 
 
 		$rules = array(
-			'pic' => 'image',
-			'title' => 'required|max:255',
+			'pic' => 'required|image',
+			'title' => 'required|max:255|unique:slides',
+            'published_at' => 'required'
 		);
 
 		$validator = Validator::make($request->all(), $rules);
@@ -80,28 +77,23 @@ class SlideController extends Controller
             $slide = new Slide();
             $slide->fill($request->all());
 
+
             $filepath = 'sliderow/'.rand(11111,99999) . '.jpg';// Картинка
-
             $image = Image::make($request->file('pic'));
-
             $image->resize(	null,
                 300,
                 function ($constraint) {
                     $constraint->aspectRatio();
                 });
 
+
             if( Storage::put( 'public/'. $filepath, (string)$image->encode() ) ) {
 
                 $slide->user_id = 1;
                 $slide->alttitle = Str::slug($request->title);
-
-                $slide->published_at = $request->published_at;
-                //$slide->published_at = $request->published_at;
-                //\Carbon\Carbon::parse($request->published_at)->format('Y-m-d H:i:s');
-                $slide->active = 1;
                 $slide->pic = $filepath;
-
                 $slide->save();
+
 
                 return redirect()
                             ->action('SlideController@index')
@@ -150,24 +142,27 @@ class SlideController extends Controller
         if(!$request->hasFile('pic')) {
             $notPic = true;
         }
+
         
         // Правила валидации
         if($request->title == $slide->title) { // Если заголовок не обновляли
             $rules = array(
                 'pic' => 'image',
                 'title' => 'required|max:255',
+                'published_at' => 'required'
             );
         } else { // Если обновили заголовок
             $rules = array(
                 'pic' => 'image',
                 'title' => 'required|max:255|unique:slides',
+                'published_at' => 'required'
             );
         }
 
 
         $validator = Validator::make($request->all(), $rules);
 
-        if ($validator->fails()) { // Есл ошибка валидации
+        if ($validator->fails()) { // Если ошибка валидации
             return redirect()
                         ->back()
                         ->withErrors($validator)
@@ -179,18 +174,10 @@ class SlideController extends Controller
             
             $oldFilePic = 'public/'.$slide->pic;
 
-            /*
-
-            Готовим картинку, если ее обновляли
-
-            */
-
             if($notPic === false) { // Если с формы приходит картинка
 
                 $newPic = 'sliderow/' . rand(11111, 99999) . '.jpg'; // новая картинка
-
                 $image = Image::make($request->file('pic'));
-
                 $image->resize(null,
                     300,
                     function ($constraint) {
@@ -202,7 +189,7 @@ class SlideController extends Controller
                 if ( Storage::put('public/'.$newPic, (string) $image->encode()) ) // Создаем картинку
                 {
 
-                    // Удаляем старую картинку
+                    // Удаляем старую картинку если сохранили новую
                     if( Storage::disk('local')->exists($oldFilePic) ) {
                         Storage::delete($oldFilePic);
                     }
@@ -217,27 +204,16 @@ class SlideController extends Controller
                 }
             }
 
-            /*
 
-            Сохраняем
-
-            */
-
+            $slide->fill($request->all());
             $slide->user_id = 1;
-            $slide->title = $request->title;
             $slide->alttitle = Str::slug($request->title);
-            $slide->description = $request->description;
-            $slide->url = $request->url;
-            $slide->active = 1;
-            $slide->published_at = $request->published_at;
 
             $slide->save();
 
             return redirect()
                         ->action('SlideController@index')
                         ->with( 'message', 'Вы обновили слайдер, просто умничко!' );
-
-
 
 
         } // else если прошла валидация

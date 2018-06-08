@@ -21,3 +21,55 @@ body {
 	background: #FCC0B9;
 	border: 1px solid #FC4631;
 }
+
+
+
+
+.form-check-input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+input:checked ~ .checkmark:after {
+  display: block;
+}
+
+input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 28px;
+  width: 28px;
+  background-color: #eee;
+}
+
+input ~ .checkmark {
+  background-color: #ccc;
+  font-size: 0;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkmark:after {
+    left: 50%;
+    top: 50%;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    margin-top: -6px;
+    margin-left: -2px;
+}
+

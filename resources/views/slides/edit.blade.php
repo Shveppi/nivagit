@@ -6,9 +6,6 @@
 
 
 @section('content')
-
-	<div class="container">
-		<div class="row">
 			
 	{!!Form::model($slide, ['method' => 'PATCH', 'action' => ['SlideController@update', $slide->alttitle], 'files' => 'true'])!!}
 
@@ -16,8 +13,5 @@
 
 			
 	{!!Form::close()!!}
-
-		</div>
-	</div>
 
 @endsection
