@@ -35,7 +35,7 @@
 
 	    </div>
 
-	    <hr width="40%">
+	    
 
 	
 	</div>
@@ -55,6 +55,8 @@
 		</div>
 
 	</div>
+
+<hr width="40%" style="margin-top: 20px;">
 
 	<div class="container">
 		<div class="row justify-content-center">

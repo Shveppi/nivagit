@@ -26,4 +26,22 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function slides()
+    {
+        return $this->hasMany('App\Slide');
+    }
+
+    public function isNotAdmin() {
+
+        /*if(){
+
+            return true;    
+        }*/
+        
+
+
+        return \Auth::user()->guard;
+    }
+
 }

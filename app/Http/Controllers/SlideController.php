@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Storage;
 class SlideController extends Controller
 {
 
+    public function __construct() {
+        $this->middleware('isAdmin');
+    }
+
     /*
 
     Вывод всех слайдеров
@@ -89,7 +93,8 @@ class SlideController extends Controller
 
             if( Storage::put( 'public/'. $filepath, (string)$image->encode() ) ) {
 
-                $slide->user_id = 1;
+
+                $slide->user_id = \Auth::user()->id;
                 $slide->alttitle = Str::slug($request->title);
                 $slide->pic = $filepath;
                 $slide->save();
@@ -206,7 +211,6 @@ class SlideController extends Controller
 
 
             $slide->fill($request->all());
-            $slide->user_id = 1;
             $slide->alttitle = Str::slug($request->title);
 
             $slide->save();
