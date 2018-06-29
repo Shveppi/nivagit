@@ -11,8 +11,12 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/admin', function () {
     return view('welcome');
+});
+
+Route::get('/', function () {
+    return view('beauty.main');
 });
 
 /*
@@ -23,7 +27,7 @@ Route::post('/slide/add', 'SlideController@create');
 Route::get('/slide/{slug}', 'SlideController@editForm');
 */
 
-Route::resource('slide', 'SlideController');
+Route::resource('admin/slide', 'SlideController');
 
 //Route::resource('test', 'TestController');
 Auth::routes();

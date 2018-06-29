@@ -12,11 +12,18 @@
 	{!! Form::label('url', 'Ссылка') !!}
 	{!!Form::text('url', null, ['class' => "form-control", 'placeholder' => 'Ссылка', 'id' => 'url'])!!}
 		</div>
-
 		<div class="form-group">
 	{!! Form::label('published', 'Дата публикации') !!}
-	{!!Form::text('published_at', Carbon\Carbon::now('Europe/Moscow')->format('Y-m-d H:i'), ['class' => 'form-control datepicker-here', 'placeholder' => 'Дата публикации', 'data-timepicker' => 'true', 'data-time-format' => 'hh:ii', 'id' => 'published'])!!}
+
+
+
+	@if(!Request::is('*/edit'))
+		{!!Form::text('published_at', Carbon\Carbon::now('Europe/Moscow')->format('Y-m-d H:i'), ['class' => 'form-control datepicker-here', 'placeholder' => 'Дата публикации', 'data-timepicker' => 'true', 'data-time-format' => 'hh:ii', 'id' => 'published'])!!}
 		</div>
+	@else
+		{!!Form::text('published_at', null, ['class' => 'form-control datepicker-here', 'placeholder' => 'Дата публикации', 'data-timepicker' => 'true', 'data-time-format' => 'hh:ii', 'id' => 'published'])!!}
+		</div>
+	@endif
 				
 		<div class="custom-file">
 			{!! Form::label('file', 'Картинка') !!}

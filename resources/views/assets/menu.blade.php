@@ -13,9 +13,12 @@
           Слайдер
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/slide">Редактировать слайдер</a>
+          <a class="dropdown-item" href="{{ action('SlideController@index') }}">Редактировать слайдер</a>
+
+
+
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="/slide/create">Добавить слайдер</a>
+          <a class="dropdown-item" href="{{ action('SlideController@create') }}">Добавить слайдер</a>
         </div>
       </li>
       <li class="nav-item dropdown">

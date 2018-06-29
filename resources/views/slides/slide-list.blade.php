@@ -33,7 +33,7 @@
 			<td>
 				{!!Form::open(['method' => 'DELETE', 'action' => ['SlideController@destroy', $slide->alttitle] ])!!}
 
-					<a href="{!!action('SlideController@edit', ['slug' => $slide->alttitle])!!}" class="btn btn-gray br-blue"><i class="fas fa-pencil-alt"></i></a>
+					<a href="{{ action('SlideController@edit', ['slug' => $slide->alttitle]) }}" class="btn btn-gray br-blue"><i class="fas fa-pencil-alt"></i></a>
 					<button class="btn btn-gray br-red" type="submit" onclick="return confirm('Подтвердите удаление')"><i class="far fa-trash-alt"></i></button>
 					
 				{!! Form::close() !!}

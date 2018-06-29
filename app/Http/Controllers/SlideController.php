@@ -24,7 +24,7 @@ class SlideController extends Controller
     */
     public function index() {
 
-        $slides = Slide::paginate(20);
+        $slides = Slide::latest('published_at')->paginate(20);
 
         return view('slides.slide-list', compact('slides'));
         
@@ -78,9 +78,6 @@ class SlideController extends Controller
             Готовим картинку
 
             */
-            $slide = new Slide();
-            $slide->fill($request->all());
-
 
             $filepath = 'sliderow/'.rand(11111,99999) . '.jpg';// Картинка
             $image = Image::make($request->file('pic'));
@@ -93,7 +90,8 @@ class SlideController extends Controller
 
             if( Storage::put( 'public/'. $filepath, (string)$image->encode() ) ) {
 
-
+                $slide = new Slide();
+                $slide->fill($request->all());
                 $slide->user_id = \Auth::user()->id;
                 $slide->alttitle = Str::slug($request->title);
                 $slide->pic = $filepath;

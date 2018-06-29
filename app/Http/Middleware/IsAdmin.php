@@ -16,7 +16,7 @@ class IsAdmin
     public function handle($request, Closure $next)
     {
 
-       if(\Auth::user() &&  \Auth::user()->guard == 17){
+       if(\Auth::user() &&  \Auth::user()->guard == 17 && $request->is('admin/*')){
             return $next($request);
         }
 
