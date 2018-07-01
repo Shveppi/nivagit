@@ -31,11 +31,12 @@ $(document).ready(function() {
  /* Home Slideshow Vegas
   -----------------------------------------------*/
   $(function() {
-    $('body').vegas({
+    $('.vegas-img').vegas({
         slides: [
-            { src: 'images/slide-img1.jpg' },
-            { src: 'images/slide-img2.jpg' },
-            { src: 'images/slide-img3.jpg' }
+            { src: 'https://pp.userapi.com/c639318/v639318249/187e6/vHprzoEiRYo.jpg' },
+            { src: 'https://pp.userapi.com/c639522/v639522051/6414b/zWdIAqXXBf0.jpg' },
+            { src: 'https://pp.userapi.com/c639318/v639318249/18750/HD6-9LRnx0w.jpg' }/*,
+            { src: 'fronpo/images/slide-img3.jpg' }*/
         ],
         timer: false,
         transition: [ 'zoomIn', ],

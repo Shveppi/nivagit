@@ -17,10 +17,10 @@ class CreateSlidesTable extends Migration
             $table->increments('id'); // Ид слайда
             $table->string('title', 100); // Заголовок
             $table->string('alttitle', 255); // Альт тайтл eng для ссылки
-            $table->string('description', 255); // Описание
-            $table->string('url', 100); // Ссылка
+            $table->string('description', 255)->nullable(); // Описание
+            $table->string('url', 100)->nullable(); // Ссылка
             $table->string('pic', 100); // Картинка
-            $table->integer('active'); // Активность
+            $table->integer('active')->nullable(); // Активность
             $table->integer('user_id'); // Автор
             $table->timestamp('published_at')->nullable(); // Дата публикации
             $table->timestamps(); // Дата редактирования/добавления

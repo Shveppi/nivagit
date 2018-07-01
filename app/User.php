@@ -32,16 +32,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Slide');
     }
 
-    public function isNotAdmin() {
+    public function isAdmin() {
 
-        /*if(){
+        return ($this->guard == 17) ? true : false;
 
-            return true;    
-        }*/
-        
-
-
-        return \Auth::user()->guard;
     }
 
 }

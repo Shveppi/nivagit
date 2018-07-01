@@ -8,7 +8,7 @@
 	<meta name="keywords" content="">
 	<meta name="description" content="">
 
-	<title>Snapshot HTML CSS Web Template</title>
+	<title>Божья нива</title>
 
   {{Html::style(asset('fronpo/css/bootstrap.min.css'))}}
   {{Html::style(asset('fronpo/css/animate.min.css'))}}
@@ -23,7 +23,7 @@
   {{Html::style(asset('//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,300'))}}
 	
 </head>
-<body id="top" data-spy="scroll" data-offset="50" data-target=".navbar-collapse">
+<body class="vegas-img" id="top" data-spy="scroll" data-offset="50" data-target=".navbar-collapse">
 
 
 <!-- Preloader section -->
@@ -34,165 +34,51 @@
 
 
 <!-- Navigation section  -->
-
-  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-
-      <div class="navbar-header">
-        <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="icon icon-bar"></span>
-          <span class="icon icon-bar"></span>
-          <span class="icon icon-bar"></span>
-        </button>
-        <a href="#top" class="navbar-brand smoothScroll">Snapshot</a>
-      </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#top" class="smoothScroll"><span>Home</span></a></li>
-            <li><a href="#about" class="smoothScroll"><span>About</span></a></li>
-            <li><a href="#gallery" class="smoothScroll"><span>Gallery</span></a></li>
-            <li><a href="#contact" class="smoothScroll"><span>Contact</span></a></li>
-          </ul>
-       </div>
-
-    </div>
-  </div>
-
+@include('beauty.include.menu')
 
 <!-- Home section -->
 
-<section id="home">
-  <div class="overlay"></div>
-  <div class="container">
-    <div class="row">
 
-      <div class="col-md-offset-1 col-md-10 col-sm-12 wow fadeInUp" data-wow-delay="0.3s">
-        <h1 class="wow fadeInUp" data-wow-delay="0.6s">Let's take a snapshot</h1>
-        <p class="wow fadeInUp" data-wow-delay="0.9s">Snapshot website template is available for free download. Anyone can modify and use it for any site. Please tell your friends about <a rel="nofollow" href="http://www.templatemo.com">templatemo</a>. Thank you.</p>
-        <a href="#about" class="smoothScroll btn btn-success btn-lg wow fadeInUp" data-wow-delay="1.2s">Learn more</a>
+
+@if(Request::path() == '/')
+
+  <section id="home">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-offset-1 col-md-10 col-sm-12 wow fadeInUp" data-wow-delay="0.3s">
+            <h1 class="wow fadeInUp" data-wow-delay="0.6s">Божья <strong style="color: #FFC074">НИВА</strong></h1>
+            <p class="wow fadeInUp" data-wow-delay="0.9s"><i>Церковь христиан веры евангельской (пятидесятников) "Божья нива" г. Липецка.</i></p>
+          {{--<a href="#about" class="smoothScroll btn btn-success btn-lg wow fadeInUp" data-wow-delay="1.2s">Learn more</a>--}}
+        </div>
+
       </div>
-
     </div>
-  </div>
-</section>
+  </section>
 
+@else
+
+    <section class="small-screen image-bg p0" style="opacity: 0.9; background: #304352;">
+        <div class="parallax-window " data-parallax="scroll" data-speed="1.2" data-position="-500px 0px" data-image-src="https://cdn.colorlib.com/shapely/wp-content/uploads/sites/12/2016/12/photo-1451417379553-15d8e8f49cde.jpg" data-ios-fix="true" data-over-scroll-fix="true" data-android-fix="true">
+            <div style="height: 250px;"></div>
+        </div>
+    </section>
+
+@endif
 
 <!-- About section -->
+
 
 <section id="about">
   <div class="container">
     <div class="row">
 
-      <div class="col-md-9 col-sm-8 wow fadeInUp" data-wow-delay="0.2s">
-        <div class="about-thumb">
-          <h1>Background</h1>
-          <p>Quisque tempor bibendum dolor at volutpat. Suspendisse venenatis quam sed libero euismod feugiat. In cursus nisi vitae lectus facilisis mollis. Nullam scelerisque, quam nec iaculis vulputate.</p>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-sm-4 wow fadeInUp about-img" data-wow-delay="0.6s">
-        <img src="images/about-img.jpg" class="img-responsive img-circle" alt="About">
-      </div>
-
-      <div class="clearfix"></div>
-
-      <div class="col-md-12 col-sm-12 wow fadeInUp" data-wow-delay="0.3s">
-        <div class="section-title text-center">
-          <h1>Snapshot Team</h1>
-          <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h3>
-        </div>
-      </div>
-
-      <!-- team carousel -->
-      <div id="team-carousel" class="owl-carousel">
-
-      <div class="item col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.4s">
-        <div class="team-thumb">
-          <div class="image-holder">
-            <img src="images/team-img1.jpg" class="img-responsive img-circle" alt="Mary">
-          </div>
-          <h2 class="heading">Mary, CEO</h2>
-          <p class="description">Aliquam ac justo est. Praesent feugiat cursus est.</p>
-        </div>
-      </div>
-
-      <div class="item col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.6s">
-        <div class="team-thumb">
-          <div class="image-holder">
-            <img src="images/team-img2.jpg" class="img-responsive img-circle" alt="Jack">
-          </div>
-          <h2 class="heading">Jack, Founder</h2>
-          <p class="description">Maecenas sed diam eget risus varius blandit sit non.</p>
-        </div>
-      </div>
-
-      <div class="item col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.8s">
-        <div class="team-thumb">
-          <div class="image-holder">
-            <img src="images/team-img3.jpg" class="img-responsive img-circle" alt="Linda">
-          </div>
-          <h2 class="heading">Linda, Manager</h2>
-          <p class="description">Phasellus nec ante in nunc molestie tincidunt ut eu diam.</p>
-        </div>
-      </div>
-
-      <div class="item col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.8s">
-        <div class="team-thumb">
-          <div class="image-holder">
-            <img src="images/team-img4.jpg" class="img-responsive img-circle" alt="Sandy">
-          </div>
-          <h2 class="heading">Sandy, Director</h2>
-          <p class="description">Curabitur vulputate euismod neque et tincidunt.</p>
-        </div>
-      </div>
-
-      <div class="item col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.8s">
-        <div class="team-thumb">
-          <div class="image-holder">
-            <img src="images/team-img5.jpg" class="img-responsive img-circle" alt="Lukia">
-          </div>
-          <h2 class="heading">Lukia, Fashion</h2>
-          <p class="description">Maecenas sed diam eget risus varius blandit sit.</p>
-        </div>
-      </div>
-
-      <div class="item col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.8s">
-        <div class="team-thumb">
-          <div class="image-holder">
-            <img src="images/team-img6.jpg" class="img-responsive img-circle" alt="George">
-          </div>
-          <h2 class="heading">George, Admin</h2>
-          <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-        </div>
-      </div>
-
-      <div class="item col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.8s">
-        <div class="team-thumb">
-          <div class="image-holder">
-            <img src="images/team-img7.jpg" class="img-responsive img-circle" alt="Day">
-          </div>
-          <h2 class="heading">Day, Accountant</h2>
-          <p class="description">Maecenas sed diam eget risus varius blandit sit.</p>
-        </div>
-      </div>
-
-      <div class="item col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.8s">
-        <div class="team-thumb">
-          <div class="image-holder">
-            <img src="images/team-img8.jpg" class="img-responsive img-circle" alt="Lynn">
-          </div>
-          <h2 class="heading">Lynn, Marketing</h2>
-          <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-        </div>
-      </div>
-
-      </div>
-      <!-- end team carousel -->
+      @yield('content')
 
     </div>
   </div>
 </section>
-
 
 <!-- Gallery section -->
 
@@ -210,7 +96,7 @@
       <ul class="grid cs-style-4">
         <li class="col-md-6 col-sm-6">
           <figure>
-            <div><img src="images/gallery-img1.jpg" alt="image 1"></div>
+            <div><img src="fronpo/images/gallery-img1.jpg" alt="image 1"></div>
             <figcaption>
               <h1>Sapien arcu</h1>
               <small>Cum sociis natoque penatibus et magnis dis parturient montes.</small>
@@ -221,7 +107,7 @@
 
         <li class="col-md-6 col-sm-6">
           <figure>
-            <div><img src="images/gallery-img2.jpg" alt="image 2"></div>
+            <div><img src="fronpo/images/gallery-img2.jpg" alt="image 2"></div>
             <figcaption>
               <h1>Aliquam erat</h1>
               <small>Suspendisse venenatis quam sed libero euismod feugiat.</small>
@@ -232,7 +118,7 @@
 
         <li class="col-md-6 col-sm-6">
           <figure>
-            <div><img src="images/gallery-img3.jpg" alt="image 3"></div>
+            <div><img src="fronpo/images/gallery-img3.jpg" alt="image 3"></div>
             <figcaption>
               <h1>Cras ante sem</h1>
               <small>Aenean urna massa, convallis vehicula velit et, dictum pellentesque nisi.</small>
@@ -243,7 +129,7 @@
 
         <li class="col-md-6 col-sm-6">
           <figure>
-            <div><img src="images/gallery-img4.jpg" alt="image 4"></div>
+            <div><img src="fronpo/images/gallery-img4.jpg" alt="image 4"></div>
             <figcaption>
               <h1>Sed ornare</h1>
               <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</small>
@@ -295,6 +181,7 @@
 
 <!-- Footer section -->
 
+
 <footer>
 	<div class="container">
     
@@ -310,8 +197,7 @@
                     <li><a href="#" class="fa fa-google-plus wow fadeInUp" data-wow-delay="1.0s"></a></li>
                 </ul>
 
-				<p class="wow fadeInUp"  data-wow-delay="1s" >Copyright &copy; 2016 Snapshot Studio | 
-                Design: <a href="https://plus.google.com/+templatemo" title="free css templates" target="_blank">Templatemo</a></p>
+              <p class="wow fadeInUp"  data-wow-delay="1s" >Powered by <a href="//vk.com/shveppi">shveppi</a></p>
                 
 			</div>
 			
@@ -333,6 +219,7 @@
 {{Html::script(asset('fronpo/js/owl.carousel.min.js'))}}
 {{Html::script(asset('fronpo/js/smoothscroll.js'))}}
 {{Html::script(asset('fronpo/js/wow.min.js'))}}
+{{Html::script(asset('fronpo/js/parallax.js'))}}
 {{Html::script(asset('fronpo/js/custom.js'))}}
 
 </body>
