@@ -143,3 +143,76 @@
 		min-width: 300px;
 	}
 }
+
+#content {
+	padding: 15px 0 40px;
+}
+
+.section-bg {
+	background: url(/fronpo/images/section-bg2.jpg) no-repeat center center / 100%;
+	margin-top: 55px;
+}
+.section-img {
+	background: #304352;
+	height: 220px;
+	opacity: 0.9;
+}
+
+#contact .maps {
+	position: relative;
+	transition: all 700ms;
+}
+
+#contact .maps::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    background: #304352;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.9;
+}
+
+#contact .maps:hover::after {
+	display: none;
+}
+
+
+.tt-page {
+    background: #fff;
+    border: 1px solid #e1e1e1;
+    margin-bottom: 30px;
+    -webkit-transition: all 300ms ease-in-out;
+    -o-transition: all 300ms ease-in-out;
+    transition: all 300ms ease-in-out;
+}
+
+.tt-page:hover {
+	box-shadow: 0 10px 20px 0 #e1e1e1;
+}
+
+.tt-page-img-wrap {
+    position: relative;
+}
+
+.tt-page-img {
+	width: 348px;
+    height: 172px;
+    display: block;
+    margin: 0 auto;
+    background-position: center center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.tt-page-title {
+    display: block;
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: 500;
+    color: #111111;
+    text-align: center;
+    padding: 15px 0;
+    border-top: 1px solid #e1e1e1;
+}

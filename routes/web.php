@@ -18,6 +18,9 @@ Route::get('/admin', function () {
 Route::get('/', 'MainController@index');
 
 Route::get('contact', 'MainController@contact');
+Route::get('gallery', 'MainController@gallery');
+
+Route::get('gallery/detail', 'MainController@detail');
 
 /*
 Route::get('/slide/add', 'SlideController@showForm');

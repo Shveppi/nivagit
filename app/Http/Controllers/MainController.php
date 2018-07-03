@@ -12,8 +12,20 @@ class MainController extends Controller
     }
 
 
-    public function contact ()
+    public function contact()
     {
         return view('beauty.contact');
+    }
+
+
+    public function gallery()
+    {
+        return view('beauty.list.gallery-list');
+    }
+
+
+    public function detail()
+    {
+        return view('beauty.detail.gallery-detail');
     }
 }

@@ -33,10 +33,9 @@ $(document).ready(function() {
   $(function() {
     $('.vegas-img').vegas({
         slides: [
-            { src: 'https://pp.userapi.com/c639318/v639318249/187e6/vHprzoEiRYo.jpg' },
-            { src: 'https://pp.userapi.com/c639522/v639522051/6414b/zWdIAqXXBf0.jpg' },
-            { src: 'https://pp.userapi.com/c639318/v639318249/18750/HD6-9LRnx0w.jpg' }/*,
-            { src: 'fronpo/images/slide-img3.jpg' }*/
+            { src: '/fronpo/images/vHprzoEiRYo.jpg' },
+            { src: '/fronpo/images/zWdIAqXXBf0.jpg' },
+            { src: '/fronpo/images/HD6-9LRnx0w.jpg' }
         ],
         timer: false,
         transition: [ 'zoomIn', ],

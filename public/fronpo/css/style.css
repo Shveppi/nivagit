@@ -665,6 +665,68 @@ footer {
 
 }
 
+.head-detail {
+    position: relative;
+    width: 100%;
+    min-height: 620px;
+    overflow: hidden;
+}
 
+.pic-detail {
+    display: block;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-attachment: scroll;
+}
 
+.paginate-thumb {
+  background: rgba(0, 0, 0, 0.8);;
+  height: 100px;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  overflow: hidden;
+  padding: 0 20px;
+}
+
+.thumb-item {
+  padding: 15px;
+  margin: 0 20px;
+}
+
+.thumb-img {
+  height: 70px;
+  width: 70px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  float: left;
+}
+
+.thumb-info {
+  padding-left: 15px;
+  float: left;
+  color: #fff;
+}
+
+.thumb-info .thumb-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-family: 'Arimo',sans-serif;
+}
+
+.thumb-info .thumb-subtitle {
+    font-size: 14px;
+    font-weight: 400;
+    color: #4d4d4d;
+    font-family: 'Arimo',monospace;
+}
 

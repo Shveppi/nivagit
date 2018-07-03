@@ -23,7 +23,7 @@
   {{Html::style(asset('//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,300'))}}
 	
 </head>
-<body class="vegas-img" id="top" data-spy="scroll" data-offset="50" data-target=".navbar-collapse">
+<body @if(Request::path() == '/')class="vegas-img"@endif id="top" data-spy="scroll" data-offset="50" data-target=".navbar-collapse">
 
 
 <!-- Preloader section -->
@@ -49,7 +49,7 @@
 
         <div class="col-md-offset-1 col-md-10 col-sm-12 wow fadeInUp" data-wow-delay="0.3s">
             <h1 class="wow fadeInUp" data-wow-delay="0.6s">Божья <strong style="color: #FFC074">НИВА</strong></h1>
-            <p class="wow fadeInUp" data-wow-delay="0.9s"><i>Церковь христиан веры евангельской (пятидесятников) "Божья нива" г. Липецка.</i></p>
+            <p class="wow fadeInUp" data-wow-delay="0.9s"><i>Церковь христиан веры евангельской (пятидесятников) "Божья нива"<br/>город Липецк, Липецкая область.</i></p>
           {{--<a href="#about" class="smoothScroll btn btn-success btn-lg wow fadeInUp" data-wow-delay="1.2s">Learn more</a>--}}
         </div>
 
@@ -58,18 +58,18 @@
   </section>
 
 @else
-
-    <section class="small-screen image-bg p0" style="opacity: 0.9; background: #304352;">
-        <div class="parallax-window " data-parallax="scroll" data-speed="1.2" data-position="-500px 0px" data-image-src="https://cdn.colorlib.com/shapely/wp-content/uploads/sites/12/2016/12/photo-1451417379553-15d8e8f49cde.jpg" data-ios-fix="true" data-over-scroll-fix="true" data-android-fix="true">
-            <div style="height: 250px;"></div>
-        </div>
-    </section>
+  
+  @section('section-head')
+    <div class="section-bg">
+      <div class="section-img"></div>
+    </div>
+  @show
 
 @endif
 
 <!-- About section -->
 
-
+@if(Request::path() == '/')
 <section id="about">
   <div class="container">
     <div class="row">
@@ -80,8 +80,39 @@
   </div>
 </section>
 
+@else
+
+@section('block-title')
+  <section id="head-title" style="text-align: center">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-offset-2 col-md-8 col-sm-12 wow fadeInUp" data-wow-delay="0.3s">
+        <div class="section-title">
+            <h1>@yield('title', 'Главная')</h1>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+@show
+
+<section id="content">
+  <div @if(Request::path() !== 'gallery/detail')class="container" @else class="container-fluid" @endif>
+    <div class="row">
+
+      @yield('content')
+
+    </div>
+  </div>
+</section>
+
+@endif
+
 <!-- Gallery section -->
 
+
+@if(Request::path() == '/')
 <section id="gallery">
   <div class="container">
     <div class="row">
@@ -93,7 +124,7 @@
         </div>
       </div>
 
-      <ul class="grid cs-style-4">
+      <ul class="grid cs-style-3">
         <li class="col-md-6 col-sm-6">
           <figure>
             <div><img src="fronpo/images/gallery-img1.jpg" alt="image 1"></div>
@@ -143,9 +174,10 @@
   </div>
 </section>
 
-
+@endif
 <!-- Contact section -->
 
+@if(Request::path() == '/' || Request::path() == 'contact')
 <section id="contact">
   <div class="container">
     <div class="row">
@@ -153,31 +185,20 @@
        <div class="col-md-offset-1 col-md-10 col-sm-12">
 
         <div class="col-lg-offset-1 col-lg-10 section-title wow fadeInUp" data-wow-delay="0.4s">
-          <h1>Send a message</h1>
-          <p>Nunc suscipit ante in lectus laoreet, nec pharetra diam dictum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+          <h1>Наглядно где мы</h1>
+          <p>Рекомендуем предварительно наглядно ознакомиться, где мы находимся.</p>
         </div>
-
-        <form action="#" method="post" class="wow fadeInUp" data-wow-delay="0.8s">
-          <div class="col-md-6 col-sm-6">
-            <input name="name" type="text" class="form-control" id="name" placeholder="Name">
-          </div>
-          <div class="col-md-6 col-sm-6">
-            <input name="email" type="email" class="form-control" id="email" placeholder="Email">
-          </div>
-          <div class="col-md-12 col-sm-12">
-            <textarea name="message" rows="6" class="form-control" id="message" placeholder="Message"></textarea>
-          </div>
-          <div class="col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6">
-            <input type="submit" class="form-control" value="SEND MESSAGE">
-          </div>
-        </form>
-
       </div>
+    <div style="clear: both;"></div>
+    <div class="maps wow fadeInUp" data-wow-delay="0.4s">
+       <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A7455a0aababc5d6a0f31b6eb7c47d54e2b8540a8533549af62c3438c8f78c16b&amp;source=constructor" width="1110" height="400" frameborder="0"></iframe>
+    </div>
+    <div style="clear: both;"></div>
 
     </div>
   </div>
 </section>
-
+@endif
 
 <!-- Footer section -->
 
@@ -197,7 +218,7 @@
                     <li><a href="#" class="fa fa-google-plus wow fadeInUp" data-wow-delay="1.0s"></a></li>
                 </ul>
 
-              <p class="wow fadeInUp"  data-wow-delay="1s" >Powered by <a href="//vk.com/shveppi">shveppi</a></p>
+              <p class="wow fadeInUp"  data-wow-delay="1s" >Powered by <a href="//vk.com/shveppi" target="_blank">shveppi</a></p>
                 
 			</div>
 			
