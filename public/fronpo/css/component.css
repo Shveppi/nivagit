@@ -186,6 +186,7 @@
     -webkit-transition: all 300ms ease-in-out;
     -o-transition: all 300ms ease-in-out;
     transition: all 300ms ease-in-out;
+    position: relative;
 }
 
 .tt-page:hover {
