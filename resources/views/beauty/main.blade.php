@@ -10,14 +10,16 @@
 
 	<title>Божья нива</title>
 
-  {{Html::style(asset('fronpo/css/bootstrap.min.css'))}}
-  {{Html::style(asset('fronpo/css/animate.min.css'))}}
-  {{Html::style(asset('fronpo/css/font-awesome.min.css'))}}
-  {{Html::style(asset('fronpo/css/component.css'))}}
-  {{Html::style(asset('fronpo/css/owl.theme.css'))}}
-  {{Html::style(asset('fronpo/css/owl.carousel.css'))}}
-  {{Html::style(asset('fronpo/css/vegas.min.css'))}}
-  {{Html::style(asset('fronpo/css/style.css'))}}
+  {{Html::style(asset('/fronpo/css/bootstrap.min.css'))}}
+  {{Html::style(asset('/fronpo/css/animate.min.css'))}}
+  {{Html::style(asset('/fronpo/css/font-awesome.min.css'))}}
+  {{Html::style(asset('/fronpo/css/component.css'))}}
+  {{Html::style(asset('/fronpo/css/owl.theme.css'))}}
+  {{Html::style(asset('/fronpo/css/owl.carousel.css'))}}
+  {{Html::style(asset('/fronpo/css/vegas.min.css'))}}
+  {{Html::style(asset('/fronpo/css/jquery.fancybox.min.css'))}}
+  {{--Html::style(asset('/fronpo/css/shuffle-styles.css'))--}}
+  {{Html::style(asset('/fronpo/css/style.css'))}}
 
 	<!-- Google web font  -->
   {{Html::style(asset('//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,300'))}}
@@ -98,13 +100,10 @@
 @show
 
 <section id="content">
-  <div @if(Request::path() !== 'gallery/detail')class="container" @else class="container-fluid" @endif>
-    <div class="row">
 
       @yield('content')
 
-    </div>
-  </div>
+      
 </section>
 
 @endif
@@ -123,6 +122,8 @@
           <p>Nullam scelerisque, quam nec iaculis vulputate, arcu ligula sollicitudin nisl, ac volutpat erat nulla a arcu.</p>
         </div>
       </div>
+
+  {{--
 
       <ul class="grid cs-style-3">
         <li class="col-md-6 col-sm-6">
@@ -170,9 +171,110 @@
         </li>
       </ul>
 
+      --}}
+
+
+<div class="col-md-4">
+      <div class="filters-group">
+          <p class="filter-label">Filter</p>
+          <div class="btn-group filter-options">
+            <button class="btn" data-group="all">All</button>
+            <button class="btn" data-group="nature">Nature</button>
+            <button class="btn" data-group="animal">Animal</button>
+            <button class="btn" data-group="city">City</button>
+          </div>
+        </div>
+</div>
+
+
+<br />
+    <hr>
+
+
+  
+<div id="grid" class="gallery-list col-md-12">
+      
+    @php
+      
+      $group = ['', 'nature', 'animal', 'city', 'nature'];
+
+    @endphp
+
+          
+@for ($i = 1; $i <= 4; $i++)
+    
+  
+  <figure class="picture-item gallery-item" data-groups='["{{$group[$i]}}", "all"]'>
+
+    <a class="gallery-img" data-fancybox="images" href="/fronpo/images/gallery-img{{$i}}.jpg"><img src="/fronpo/images/gallery-img{{$i}}.jpg" height="250px"><i class="fa fa-instagram"></i></a>
+    <div class="my-sizer-element" style="width:auto;"></div>
+  </figure>
+
+
+@endfor
+
+  <figure class="picture-item gallery-item" data-groups='["city", "all"]'>
+
+    <a class="gallery-img" data-fancybox="images" href="http://responsv.com/flexible-math/img/explanation.png"><img src="http://responsv.com/flexible-math/img/explanation.png" height="250px"><i class="fa fa-instagram"></i></a>
+    <div class="my-sizer-element" style="width:auto;"></div>
+  </figure>
+
+  @for ($i = 1; $i <= 4; $i++)
+    
+  
+  <figure class="picture-item gallery-item" data-groups='["{{$group[$i]}}", "all"]'>
+
+    <a class="gallery-img" data-fancybox="images" href="/fronpo/images/gallery-img{{$i}}.jpg"><img src="/fronpo/images/gallery-img{{$i}}.jpg" height="250px"><i class="fa fa-instagram"></i></a>
+    <div class="my-sizer-element" style="width:auto;"></div>
+  </figure>
+
+
+  @endfor
+
+
+{{--
+<figure class="picture-item gallery-item col-4@sm" data-groups='["nature", "all"]'>
+    <div class="aspect aspect--16x9">
+      <div class="aspect__inner">
+      <a class="gallery-img" data-fancybox="images" href="/fronpo/images/gallery-img2.jpg"><img src="/fronpo/images/gallery-img2.jpg"><i class="fa fa-instagram"></i></a>
+      </div>
+    </div>
+</figure>
+
+<figure class="picture-item gallery-item col-4@sm" data-groups='["city", "all"]'>
+    <div class="aspect aspect--16x9">
+      <div class="aspect__inner">
+        <a class="gallery-img" data-fancybox="images" href="/fronpo/images/team-img3.jpg"><img src="/fronpo/images/team-img3.jpg"><i class="fa fa-instagram"></i></a>
+      </div>
+    </div>
+</figure>
+
+
+<figure class="picture-item gallery-item col-4@sm" data-groups='["animal", "all"]'>
+    <div class="aspect aspect--16x9">
+      <div class="aspect__inner">
+      <a class="gallery-img" data-fancybox="images" href="/fronpo/images/gallery-img2.jpg"><img src="/fronpo/images/gallery-img2.jpg"><i class="fa fa-instagram"></i></a>
+      </div>
+    </div>
+</figure>
+
+--}}
+
+      
+      
+</div>
+
+
+
+
+
+
+
+
     </div>
   </div>
 </section>
+
 
 @endif
 <!-- Contact section -->
@@ -191,7 +293,7 @@
       </div>
     <div style="clear: both;"></div>
     <div class="maps wow fadeInUp" data-wow-delay="0.4s">
-       <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A7455a0aababc5d6a0f31b6eb7c47d54e2b8540a8533549af62c3438c8f78c16b&amp;source=constructor" width="1110" height="400" frameborder="0"></iframe>
+       <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A7455a0aababc5d6a0f31b6eb7c47d54e2b8540a8533549af62c3438c8f78c16b&amp;source=constructor" width="970" height="400" frameborder="0"></iframe>
     </div>
     <div style="clear: both;"></div>
 
@@ -232,16 +334,18 @@
 
 <!-- Javascript  -->
 
-{{Html::script(asset('fronpo/js/jquery.js'))}}
-{{Html::script(asset('fronpo/js/bootstrap.min.js'))}}
-{{Html::script(asset('fronpo/js/vegas.min.js'))}}
-{{Html::script(asset('fronpo/js/modernizr.custom.js'))}}
-{{Html::script(asset('fronpo/js/toucheffects.js'))}}
-{{Html::script(asset('fronpo/js/owl.carousel.min.js'))}}
-{{Html::script(asset('fronpo/js/smoothscroll.js'))}}
-{{Html::script(asset('fronpo/js/wow.min.js'))}}
-{{Html::script(asset('fronpo/js/parallax.js'))}}
-{{Html::script(asset('fronpo/js/custom.js'))}}
+{{Html::script(asset('/fronpo/js/jquery.js'))}}
+{{Html::script(asset('/fronpo/js/bootstrap.min.js'))}}
+{{Html::script(asset('/fronpo/js/vegas.min.js'))}}
+{{Html::script(asset('/fronpo/js/modernizr.custom.js'))}}
+{{Html::script(asset('/fronpo/js/toucheffects.js'))}}
+{{Html::script(asset('/fronpo/js/owl.carousel.min.js'))}}
+{{Html::script(asset('/fronpo/js/smoothscroll.js'))}}
+{{Html::script(asset('/fronpo/js/wow.min.js'))}}
+{{Html::script(asset('/fronpo/js/jquery.fancybox.min.js'))}}
+{{Html::script(asset('/fronpo/js/shuffle.js'))}}
+{{Html::script(asset('/fronpo/js/mixitup.min.js'))}}
+{{Html::script(asset('/fronpo/js/custom.js'))}}
 
 </body>
 </html>

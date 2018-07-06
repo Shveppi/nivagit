@@ -698,6 +698,7 @@ footer {
 
 .thumb-item {
   padding: 15px;
+  transition: all 1s ease-out 0.5s;
 }
 
 .thumb-img {
@@ -710,15 +711,19 @@ footer {
   opacity: .2;
 }
 
-.thumb-item.active .thumb-img {
+.thumb-img, .thumb-title, .thumb-subtitle {
+  transition: all 400ms;
+}
+
+.thumb-item.active .thumb-img, .thumb-item:hover .thumb-img {
   opacity: 1;
 }
 
-.thumb-item.active .thumb-title {
+.thumb-item.active .thumb-title, .thumb-item:hover .thumb-title {
   color: #fff;
 }
 
-.thumb-item.active .thumb-subtitle {
+.thumb-item.active .thumb-subtitle, .thumb-item:hover .thumb-subtitle {
   color: rgba(255,255,255,.4);
 }
 
@@ -740,37 +745,4 @@ footer {
     font-weight: 400;
     color: #4d4d4d;
     font-family: 'Arimo',monospace;
-}
-
-.tt-page i {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    font-size: 32px;
-    color: #fff;
-    background: -webkit-gradient(linear,left top,left bottom,from(transparent),to(rgba(2,2,2,.5)));
-    background: -webkit-linear-gradient(transparent,rgba(2,2,2,.5));
-    background: -o-linear-gradient(transparent,rgba(2,2,2,.5));
-    background: linear-gradient(transparent,rgba(2,2,2,.5));
-    padding-top: 80px;
-    -webkit-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-    opacity: 0;
-}
-
-.tt-page:hover i {
-    padding-top: 0;
-    opacity: 1;
 }

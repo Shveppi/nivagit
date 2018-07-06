@@ -5,7 +5,12 @@
 @endsection
 
 @section('content')
-	<div class="col-md-12 wow fadeInUp" data-wow-delay="0.3s">
+
+	<div class="container">
+		<div class="row">
+			
+		<div class="col-md-12 wow fadeInUp" data-wow-delay="0.3s">
+
 		<div class="col-lg-4 col-md-6  wow fadeInUp" data-wow-delay="0.2s"">
 			<div class="tt-page">
 				<div class="tt-page-img-wrap">
@@ -91,7 +96,14 @@
 					<a class="tt-page-title" href="http://themebubble.com/demo/photosy/home-9/">One Page</a>
 			</div>
 		</div>
+		
+		</div>
+
+
+		</div>
 	</div>
+
+	
 
 
 @endsection

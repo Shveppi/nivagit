@@ -5,7 +5,11 @@
 @endsection
 
 @section('content')
-		<div class="col-md-offset-3 col-md-6 col-sm-12">
+	
+	<div class="container">
+		<div class="row">
+			
+			<div class="col-md-offset-3 col-md-6 col-sm-12">
 			<div class="text-center"><h2>Церковь в Липецке</h2></div>
 			<p>Наш адрес: город Липецк, проспект Ударников 24а<br/>Ориентир: Сырский рудник, остановка "школа 23"</p>
 			<p>ОГРН 1064800003180 ИНН/КПП 4825044359/482501001</p>
@@ -21,5 +25,11 @@
 			<div class="text-center"><h2>Церковь на соколе</h2></div>
 			<p>Наш адрес: город Липецк, улица Осоавиахима, Молитвенный дом, Липецкая область</p>
 		</div>
+
+
+		</div>
+	</div>
+
+		
 
 @endsection
