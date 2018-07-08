@@ -126,7 +126,7 @@ var Demo = function (element) {
   this.element = element;
 
   this.shuffle = new Shuffle(element, {
-    itemSelector: '.picture-item',
+    itemSelector: '.galppp',
     sizer: element.querySelector('.my-sizer-element'),
   });
 
@@ -304,7 +304,7 @@ Demo.prototype._handleSearchKeyup = function (evt) {
       }
     }
 
-    var titleElement = element.querySelector('.picture-item__title');
+    var titleElement = element.querySelector('.tt-page-title');
     var titleText = titleElement.textContent.toLowerCase().trim();
 
     return titleText.indexOf(searchText) !== -1;

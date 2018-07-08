@@ -18,58 +18,32 @@
   {{Html::style(asset('/fronpo/css/owl.carousel.css'))}}
   {{Html::style(asset('/fronpo/css/vegas.min.css'))}}
   {{Html::style(asset('/fronpo/css/jquery.fancybox.min.css'))}}
-  {{--Html::style(asset('/fronpo/css/shuffle-styles.css'))--}}
+  {{Html::style(asset('/fronpo/css/shuffle-styles.css'))}}
   {{Html::style(asset('/fronpo/css/style.css'))}}
 
-	<!-- Google web font  -->
+{{--	<!-- Google web font  -->--}}
   {{Html::style(asset('//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,300'))}}
 	
 </head>
 <body @if(Request::path() == '/')class="vegas-img"@endif id="top" data-spy="scroll" data-offset="50" data-target=".navbar-collapse">
 
 
-<!-- Preloader section -->
+{{--<!-- Предзагрузка -->--}}
 
 <div class="preloader">
      <div class="sk-spinner sk-spinner-pulse"></div>
 </div>
 
 
-<!-- Navigation section  -->
+{{--<!-- Меню  -->--}}
 @include('beauty.include.menu')
 
-<!-- Home section -->
+{{--<!-- Верхняя картинка -->--}}
+@section('section-head')
+@include('beauty.include.head-bg')
+@show
 
-
-
-@if(Request::path() == '/')
-
-  <section id="home">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-
-        <div class="col-md-offset-1 col-md-10 col-sm-12 wow fadeInUp" data-wow-delay="0.3s">
-            <h1 class="wow fadeInUp" data-wow-delay="0.6s">Божья <strong style="color: #FFC074">НИВА</strong></h1>
-            <p class="wow fadeInUp" data-wow-delay="0.9s"><i>Церковь христиан веры евангельской (пятидесятников) "Божья нива"<br/>город Липецк, Липецкая область.</i></p>
-          {{--<a href="#about" class="smoothScroll btn btn-success btn-lg wow fadeInUp" data-wow-delay="1.2s">Learn more</a>--}}
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-@else
-  
-  @section('section-head')
-    <div class="section-bg">
-      <div class="section-img"></div>
-    </div>
-  @show
-
-@endif
-
-<!-- About section -->
+{{--<!-- Контент -->--}}
 
 @if(Request::path() == '/')
 <section id="about">
@@ -108,8 +82,8 @@
 
 @endif
 
-<!-- Gallery section -->
 
+{{--<!-- Галерея -->--}}
 
 @if(Request::path() == '/')
 <section id="gallery">
@@ -122,56 +96,6 @@
           <p>Nullam scelerisque, quam nec iaculis vulputate, arcu ligula sollicitudin nisl, ac volutpat erat nulla a arcu.</p>
         </div>
       </div>
-
-  {{--
-
-      <ul class="grid cs-style-3">
-        <li class="col-md-6 col-sm-6">
-          <figure>
-            <div><img src="fronpo/images/gallery-img1.jpg" alt="image 1"></div>
-            <figcaption>
-              <h1>Sapien arcu</h1>
-              <small>Cum sociis natoque penatibus et magnis dis parturient montes.</small>
-              <a href="#">Read More</a>
-            </figcaption>
-          </figure>
-        </li>
-
-        <li class="col-md-6 col-sm-6">
-          <figure>
-            <div><img src="fronpo/images/gallery-img2.jpg" alt="image 2"></div>
-            <figcaption>
-              <h1>Aliquam erat</h1>
-              <small>Suspendisse venenatis quam sed libero euismod feugiat.</small>
-              <a href="#">Details</a>
-            </figcaption>
-          </figure>
-        </li>
-
-        <li class="col-md-6 col-sm-6">
-          <figure>
-            <div><img src="fronpo/images/gallery-img3.jpg" alt="image 3"></div>
-            <figcaption>
-              <h1>Cras ante sem</h1>
-              <small>Aenean urna massa, convallis vehicula velit et, dictum pellentesque nisi.</small>
-              <a href="#">Learn More</a>
-            </figcaption>
-          </figure>
-        </li>
-
-        <li class="col-md-6 col-sm-6">
-          <figure>
-            <div><img src="fronpo/images/gallery-img4.jpg" alt="image 4"></div>
-            <figcaption>
-              <h1>Sed ornare</h1>
-              <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</small>
-              <a href="#">Full Post</a>
-            </figcaption>
-          </figure>
-        </li>
-      </ul>
-
-      --}}
 
 
 <div class="col-md-4">
@@ -187,10 +111,6 @@
 </div>
 
 
-<br />
-    <hr>
-
-
   
 <div id="grid" class="gallery-list col-md-12">
       
@@ -202,63 +122,40 @@
 
           
 @for ($i = 1; $i <= 4; $i++)
-    
-  
-  <figure class="picture-item gallery-item" data-groups='["{{$group[$i]}}", "all"]'>
 
-    <a class="gallery-img" data-fancybox="images" href="/fronpo/images/gallery-img{{$i}}.jpg"><img src="/fronpo/images/gallery-img{{$i}}.jpg" height="250px"><i class="fa fa-instagram"></i></a>
-    <div class="my-sizer-element" style="width:auto;"></div>
-  </figure>
+
+  <div class="col-md-4 col-sm-6 galppp" data-groups='["{{$group[$i]}}", "all"]'>
+    <div class="tt-page">
+      <div class="tt-page-img-wrap">
+        <a class="tt-page-img" href="{{action('MainController@detail')}}" style="background-image: url(http://themebubble.com/demo/photosy/wp-content/uploads/2018/06/beach.jpg)"></a>
+      </div>
+      <a class="tt-page-title" href="{{action('MainController@detail')}}">One Page</a>
+    </div>
+  </div>
+
+
+  {{--<figure class="picture-item gallery-item col-md-4 col-sm-6 col-xs-6" data-groups='["{{$group[$i]}}", "all"]'>
+    <a class="gallery-img" data-fancybox="images" href="/fronpo/images/gallery-img{{$i}}.jpg"><img src="/fronpo/images/gallery-img{{$i}}.jpg"><i class="fa fa-instagram"></i></a>
+  </figure>--}}
 
 
 @endfor
 
-  <figure class="picture-item gallery-item" data-groups='["city", "all"]'>
-
-    <a class="gallery-img" data-fancybox="images" href="http://responsv.com/flexible-math/img/explanation.png"><img src="http://responsv.com/flexible-math/img/explanation.png" height="250px"><i class="fa fa-instagram"></i></a>
-    <div class="my-sizer-element" style="width:auto;"></div>
+  {{--<figure class="picture-item gallery-item col-md-4 col-sm-6 col-xs-6" data-groups='["city", "all"]'>
+    <a class="gallery-img" data-fancybox="images" href="http://responsv.com/flexible-math/img/explanation.png"><img src="http://responsv.com/flexible-math/img/explanation.png""><i class="fa fa-instagram"></i></a>
   </figure>
 
   @for ($i = 1; $i <= 4; $i++)
     
   
-  <figure class="picture-item gallery-item" data-groups='["{{$group[$i]}}", "all"]'>
-
-    <a class="gallery-img" data-fancybox="images" href="/fronpo/images/gallery-img{{$i}}.jpg"><img src="/fronpo/images/gallery-img{{$i}}.jpg" height="250px"><i class="fa fa-instagram"></i></a>
-    <div class="my-sizer-element" style="width:auto;"></div>
+  <figure class=  "picture-item gallery-item col-md-4 col-sm-6 col-xs-6" data-groups='["{{$group[$i]}}", "all"]'>
+    <a class="gallery-img" data-fancybox="images" href="/fronpo/images/gallery-img{{$i}}.jpg"><img src="/fronpo/images/gallery-img{{$i}}.jpg"><i class="fa fa-instagram"></i></a>
   </figure>
 
 
-  @endfor
+  @endfor--}}
 
-
-{{--
-<figure class="picture-item gallery-item col-4@sm" data-groups='["nature", "all"]'>
-    <div class="aspect aspect--16x9">
-      <div class="aspect__inner">
-      <a class="gallery-img" data-fancybox="images" href="/fronpo/images/gallery-img2.jpg"><img src="/fronpo/images/gallery-img2.jpg"><i class="fa fa-instagram"></i></a>
-      </div>
-    </div>
-</figure>
-
-<figure class="picture-item gallery-item col-4@sm" data-groups='["city", "all"]'>
-    <div class="aspect aspect--16x9">
-      <div class="aspect__inner">
-        <a class="gallery-img" data-fancybox="images" href="/fronpo/images/team-img3.jpg"><img src="/fronpo/images/team-img3.jpg"><i class="fa fa-instagram"></i></a>
-      </div>
-    </div>
-</figure>
-
-
-<figure class="picture-item gallery-item col-4@sm" data-groups='["animal", "all"]'>
-    <div class="aspect aspect--16x9">
-      <div class="aspect__inner">
-      <a class="gallery-img" data-fancybox="images" href="/fronpo/images/gallery-img2.jpg"><img src="/fronpo/images/gallery-img2.jpg"><i class="fa fa-instagram"></i></a>
-      </div>
-    </div>
-</figure>
-
---}}
+    <div class="my-sizer-element col-md-4 col-sm-6" ></div>
 
       
       
@@ -277,62 +174,15 @@
 
 
 @endif
-<!-- Contact section -->
-
-@if(Request::path() == '/' || Request::path() == 'contact')
-<section id="contact">
-  <div class="container">
-    <div class="row">
-
-       <div class="col-md-offset-1 col-md-10 col-sm-12">
-
-        <div class="col-lg-offset-1 col-lg-10 section-title wow fadeInUp" data-wow-delay="0.4s">
-          <h1>Наглядно где мы</h1>
-          <p>Рекомендуем предварительно наглядно ознакомиться, где мы находимся.</p>
-        </div>
-      </div>
-    <div style="clear: both;"></div>
-    <div class="maps wow fadeInUp" data-wow-delay="0.4s">
-       <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A7455a0aababc5d6a0f31b6eb7c47d54e2b8540a8533549af62c3438c8f78c16b&amp;source=constructor" width="970" height="400" frameborder="0"></iframe>
-    </div>
-    <div style="clear: both;"></div>
-
-    </div>
-  </div>
-</section>
-@endif
-
-<!-- Footer section -->
 
 
-<footer>
-	<div class="container">
-    
-		<div class="row">
+{{-- карта и футер блок --}}
+@include('beauty.include.footer')
 
-			<div class="col-md-12 col-sm-12">
-            
-                <ul class="social-icon"> 
-                    <li><a href="#" class="fa fa-facebook wow fadeInUp" data-wow-delay="0.2s"></a></li>
-                    <li><a href="#" class="fa fa-twitter wow fadeInUp" data-wow-delay="0.4s"></a></li>
-                    <li><a href="#" class="fa fa-linkedin wow fadeInUp" data-wow-delay="0.6s"></a></li>
-                    <li><a href="#" class="fa fa-instagram wow fadeInUp" data-wow-delay="0.8s"></a></li>
-                    <li><a href="#" class="fa fa-google-plus wow fadeInUp" data-wow-delay="1.0s"></a></li>
-                </ul>
 
-              <p class="wow fadeInUp"  data-wow-delay="1s" >Powered by <a href="//vk.com/shveppi" target="_blank">shveppi</a></p>
-                
-			</div>
-			
-		</div>
-        
-	</div>
-</footer>
 
-<!-- Back top -->
 <a href="#" class="go-top"><i class="fa fa-angle-up"></i></a>
 
-<!-- Javascript  -->
 
 {{Html::script(asset('/fronpo/js/jquery.js'))}}
 {{Html::script(asset('/fronpo/js/bootstrap.min.js'))}}
@@ -344,8 +194,15 @@
 {{Html::script(asset('/fronpo/js/wow.min.js'))}}
 {{Html::script(asset('/fronpo/js/jquery.fancybox.min.js'))}}
 {{Html::script(asset('/fronpo/js/shuffle.js'))}}
-{{Html::script(asset('/fronpo/js/mixitup.min.js'))}}
+{{Html::script(asset('/fronpo/js/jquery.mosaicflow.min.js'))}}
+{{--@if(Request::path() == '/')
+    {{Html::script(asset('/fronpo/js/mixitup.min.js'))}}
+@endif--}}
 {{Html::script(asset('/fronpo/js/custom.js'))}}
-
+{{--@if(Request::path() == '/')
+<script>
+var mixer = mixitup('.mix-container');
+</script>
+@endif--}}
 </body>
 </html>

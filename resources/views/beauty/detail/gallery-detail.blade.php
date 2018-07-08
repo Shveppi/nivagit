@@ -84,7 +84,7 @@
 
 		
 
-			<div class="gallery-list shape-shuffle-container js-shuffle shuffle">
+			<div class="col-md-12">
 
 				<div class="col-lg-4 col-md-6  wow fadeInUp" data-wow-delay="0.2s">
 					<div class="tt-page">
